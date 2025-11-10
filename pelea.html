@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallitos Fighters - Login/Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 100%);
+            font-family: 'Arial Black', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* formato del header */
+        .game-header {
+            background: linear-gradient(180deg, rgba(212, 98, 31, 0.9) 0%, rgba(61, 36, 21, 0.9) 100%);
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 5px solid #d4621f;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-title {
+            color: #fff;
+            font-size: 4rem;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
+            margin: 0;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        .rooster-icon {
+            font-size: 5rem;
+            display: inline-block;
+            margin: 0 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+
+        /* contenedor principal */
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 160px);
+            padding: 50px;
+            gap: 50px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* mucho texto del lado izquierdo (info)*/
+        .info-section {
+            flex: 1;
+            max-width: 600px;
+            color: white;
+        }
+
+        .welcome-text {
+            font-size: 3rem;
+            color: #ff6b35;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .description {
+            font-size: 1.3rem;
+            color: #d4621f;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+        }
+
+        .features-list li {
+            font-size: 1.2rem;
+            color: #ff6b35;
+            margin-bottom: 15px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        /* pone un emoji sombrero como bullet point*/
+        .features-list li:before {
+            content: "🤠";
+            position: absolute;
+            left: 0;
+            right: 20;
+            font-size: 2rem;
+            color: #d4621f;
+        }
+
+        /* formulario del lado derecho*/
+        .form-section-container {
+            flex: 1;
+            max-width: 550px;
+        }
+
+        .login-card {
+            background: rgba(0, 0, 0, 0.85);
+            border: 4px solid #d4621f;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 0 40px rgba(212, 98, 31, 0.6);
+        }
+
+        .form-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 18px;
+            background: #3d2415;
+            border: 3px solid #d4621f;
+            color: #d4621f;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+        }
+
+        .tab-btn:hover {
+            background: #d4621f;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 98, 31, 0.5);
+        }
+
+        .tab-btn.active {
+            background: #d4621f;
+            color: white;
+            box-shadow: 0 0 20px rgba(212, 98, 31, 0.8);
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-label {
+            color: #ff6b35;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .form-control {
+            background: rgba(61, 36, 21, 0.8);
+            border: 3px solid #d4621f;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            background: rgba(61, 36, 21, 0.9);
+            border-color: #ff6b35;
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
+            outline: none;
+        }
+
+        .form-control::placeholder {
+            color: rgba(212, 98, 31, 0.6);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #d4621f 0%, #ff6b35 100%);
+            border: none;
+            padding: 18px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            border-radius: 12px;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 5px 20px rgba(212, 98, 31, 0.5);
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.7);
+            background: linear-gradient(135deg, #ff6b35 0%, #d4621f 100%);
+        }
+
+        .alert {
+            border-radius: 12px;
+            border: 3px solid;
+            margin-bottom: 25px;
+            padding: 15px;
+            font-size: 1.1rem;
+        }
+
+        .alert-danger {
+            background: rgba(139, 0, 0, 0.3);
+            border-color: #8b0000;
+            color: #ff6b6b;
+        }
+
+        .alert-success {
+            background: rgba(0, 100, 0, 0.3);
+            border-color: #006400;
+            color: #90ee90;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .extra-info {
+            color: #d4621f;
+            font-size: 1rem;
+            text-align: center;
+            margin-top: 25px;
+        }
+
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* botones responsivos */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+                padding: 30px;
+            }
+
+            .game-title {
+                font-size: 3rem;
+            }
+
+            .welcome-text {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="game-header">
+        <h1 class="game-title">
+            <img src="./Assets/interface/cockFighterTitulo.png" alt="Cock Fighters" style="height: 100px;">
+        </h1>
+    </div>
+
+    <div class="main-container">
+        <div class="info-section">
+            <h2 class="welcome-text">Bienvenido Gallero!</h2>
+            <p class="description">
+                Prepárate para la batalla más épica. Entrena a tus gallos,
+                desarrolla estrategias y transformate en el mejor gallero.
+            </p>
+            <ul class="features-list">
+                <li>Crea a tu entrenador 🔥🔥</li>
+                <li>Selecciona tu equipo de gallos y combate 🔥🔥</li>
+                <li>Pelea con otros jugadores 🔥🔥</li>
+                <li>Demuestra quien es el mejor gallerollama 🔥🔥</li>
+            </ul>
+        </div>
+
+        <div class="form-section-container">
+            <div class="login-card">
+                <div id="alertContainer"></div>
+
+                <div class="form-tabs">
+                    <button class="tab-btn active" onclick="showTab('login')">Iniciar Sesión</button>
+                    <button class="tab-btn" onclick="showTab('register')">Registrarse</button>
+                </div>
+
+                <div id="loginForm" class="form-section active">
+                    <form onsubmit="event.preventDefault(); showTemporaryAlert('Iniciando Sesión (Solo Interfaz)', 'success');">
+                        <div class="form-group">
+                            <label class="form-label">Usuario o Email</label>
+                            <input type="text" class="form-control" id="loginUsername" placeholder="Ingresa tu usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Ingresa tu contraseña" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Entrar al Juego</button>
+                    </form>
+                </div>
+
+                <div id="registerForm" class="form-section">
+                    <form onsubmit="event.preventDefault(); showTemporaryAlert('Registro enviado (Solo Interfaz)', 'success');">
+                        <div class="form-group">
+                            <label class="form-label">Usuario</label>
+                            <input type="text" class="form-control" id="registerUsername" placeholder="Elige tu nombre de gallero" required minlength="3">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="registerEmail" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Mínimo 6 caracteres" required minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Confirmar Contraseña</label>
+                            <input type="password" class="form-control" id="registerConfirmPassword" placeholder="Repite tu contraseña" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+                    </form>
+                </div>
+
+                <div class="extra-info">
+                    Listo para convertirte en el mejor gallero?
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //función que permite cambiar las pestañas entre login y registro
+        function showTab(tab) {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const tabs = document.querySelectorAll('.tab-btn');
+
+            // limpiar alertas
+            document.getElementById('alertContainer').innerHTML = '';
+
+            if (tab === 'login') {
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+            } else {
+                loginForm.classList.remove('active');
+                registerForm.classList.add('active');
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
+            }
+        }
+
+        //función para mostrar las alertas
+        function showTemporaryAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertClass = type === 'error' ? 'alert-danger' : 'alert-success';
+            alertContainer.innerHTML = `
+                <div class="alert ${alertClass}" role="alert">
+                    ${message}
+                </div>
+            `;
+
+            // después de 5s las quita
+            setTimeout(() => {
+                alertContainer.innerHTML = '';
+            }, 5000);
+        }
+
+    </script>
+</body>
+</html>
