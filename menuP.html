@@ -230,6 +230,25 @@
             color: white;
         }
 
+        .btn-logout {
+            background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 12px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 5px 20px rgba(139, 0, 0, 0.5);
+            color: white;
+        }
+
+        .btn-logout:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(220, 20, 60, 0.7);
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+        }
+
         .table-dark {
             background: rgba(61, 36, 21, 0.8);
             border: 3px solid #d4621f;
@@ -360,12 +379,12 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-danger" data-bs-target="#modalDeleteUserConfirm" data-bs-toggle="modal">Eliminar Cuenta</button>
-                    <div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                <div class="modal-footer" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="flex: 1;">Cancelar</button>
+                        <button type="button" class="btn btn-primary" style="flex: 1;">Guardar Cambios</button>
                     </div>
+                    <button type="button" class="btn btn-logout" onclick="logout()" style="width: 100%;">Cerrar Sesión</button>
                 </div>
             </div>
         </div>
@@ -526,6 +545,10 @@
                 });
             });
         });
+
+        function logout() {
+            window.location.href = 'pelea.html';
+        }
     </script>
 </body>
 </html>
