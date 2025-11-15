@@ -7,14 +7,14 @@ canvas.height = 576;
 c.fillRect(0,0,canvas.width, canvas.height);
 
 const player = new Player({
-    x:0+20,
+    x:0+100,
     y:0+canvas.height-200
 },
 {
-    x:300,
-    y:207
+    x:290,
+    y:200
 },
- "./Assets/gallo_sprite_front1.pngg");
+ "./Assets/gallo_sprite_front1.png");
 
 function gameLoop() {
   window.requestAnimationFrame(gameLoop);
